@@ -1,50 +1,132 @@
-ion-item {
-  --inner-padding-end: 0;
-  --background: transparent;
+// Variables de colores y tamaños
+$primary-color: #3880ff;
+$background-color: #f9f9f9;
+$card-background: white;
+$text-color: #333;
+$gray-color: #888;
+$border-radius: 8px;
+$padding: 16px;
+$shadow-color: rgba(0, 0, 0, 0.1);
+$header-height: 56px; // Para espacio en la parte superior
+
+// Estilos del resumen de inventario
+.inventory-summary {
+  background-color: $background-color;
+  padding: $padding;
+  margin-bottom: 24px;
+  border-radius: $border-radius;
+  box-shadow: 0 4px 8px $shadow-color;
+
+  .summary-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: $text-color;
+    margin-bottom: 16px;
+  }
+
+  .summary-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 16px;
+
+    .stat {
+      font-size: 1rem;
+      color: $gray-color;
+
+      strong {
+        color: $text-color;
+        font-weight: 600;
+      }
+    }
+  }
 }
 
-ion-label {
-  margin-top: 12px;
-  margin-bottom: 12px;
-}
+// Estilos para la cuadrícula de productos
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); // Adaptable según la pantalla
+  gap: 16px;
+  padding: 16px;
 
-ion-item h2 {
-  font-weight: 600;
-  
-  /**
-   * With larger font scales
-   * the date/time should wrap to the next
-   * line. However, there should be
-   * space between the name and the date/time
-   * if they can appear on the same line.
-   */
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-}
+  .product-card {
+    background: $card-background;
+    border-radius: $border-radius;
+    box-shadow: 0 4px 8px $shadow-color;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 
-ion-item .date {
-  align-items: center;
-  display: flex;
-}
+    &:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 8px 16px $shadow-color;
+    }
 
-ion-item ion-icon {
-  font-size: 42px;
-  margin-right: 8px;
-}
+    .product-image {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-top-left-radius: $border-radius;
+      border-top-right-radius: $border-radius;
+    }
 
-ion-item ion-note {
-  font-size: 0.9375rem;
-  margin-right: 12px;
-  font-weight: normal;
-}
+    .product-details {
+      padding: $padding;
 
-h1 {
-  margin: 0;
-  font-weight: bold;
-  font-size: 1.4rem;
-}
+      .product-name {
+        font-size: 1.25rem;
+        font-weight: bold;
+        color: $text-color;
+      }
 
-p {
-  line-height: 1.4;
+      .product-category {
+        font-size: 1rem;
+        color: $gray-color;
+      }
+
+      .product-price {
+        font-size: 1.125rem;
+        font-weight: bold;
+        color: $primary-color;
+        margin-top: 8px;
+      }
+
+      .product-stock {
+        font-size: 1rem;
+        color: $gray-color;
+        margin-top: 4px;
+      }
+
+      .product-variants {
+        margin-top: 16px;
+
+        span {
+          font-size: 1rem;
+          font-weight: 600;
+          color: $text-color;
+        }
+
+        ul {
+          margin-top: 8px;
+          list-style-type: disc;
+          padding-left: 20px;
+          font-size: 0.875rem;
+          color: $gray-color;
+
+          li {
+            margin-bottom: 4px;
+          }
+        }
+      }
+    }
+
+    .product-actions {
+      padding: 16px;
+      border-top: 1px solid #f0f0f0;
+
+      ion-button {
+        width: 100%;
+        font-weight: bold;
+        padding: 12px;
+      }
+    }
+  }
 }

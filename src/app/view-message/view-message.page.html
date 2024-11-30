@@ -1,29 +1,40 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-back-button [text]="getBackButtonText()" defaultHref="/"></ion-back-button>
-    </ion-buttons>
+    <ion-title>Inventario de Productos</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true" *ngIf="message">
-  <ion-item>
-    <ion-icon aria-hidden="true" name="person-circle" color="primary"></ion-icon>
-    <ion-label class="ion-text-wrap">
-      <h2>
-        {{ message.fromName }}
-        <span class="date">
-          <ion-note>{{ message.date }}</ion-note>
-        </span>
-      </h2>
-      <h3>To: <ion-note>Me</ion-note></h3>
-    </ion-label>
-  </ion-item>
-  
-  <div class="ion-padding">
-    <h1>{{ message.subject }}</h1>
-    <p>
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-    </p>
+<ion-content class="ion-padding">
+  <!-- Resumen del Inventario -->
+  <div class="inventory-summary">
+    <h2 class="summary-title">Resumen de Inventario</h2>
+    <div class="summary-stats">
+      <div class="stat">
+        <strong>Total de Productos:</strong> {{ products.length }}
+      </div>
+      <div class="stat">
+        <strong>Total Stock Disponible:</strong> {{ totalStock() }}
+      </div>
+    </div>
+  </div>
+
+  <!-- Lista de Productos -->
+  <div class="product-grid">
+    <div *ngFor="let product of products" class="product-card">
+      <img *ngIf="product.image_url" [src]="product.image_url" alt="Imagen del Producto" class="product-image">
+      <div class="product-details">
+        <h2 class="product-name">{{ product.name }}</h2>
+        <p class="product-category">{{ product.category }}</p>
+        <p class="product-price">$ {{ product.price }}</p>
+        <p class="product-stock">Stock: {{ product.stock }}</p>
+        <div *ngIf="product.variants && product.variants.length > 0" class="product-variants">
+          <span>Variantes:</span>
+          <ul>
+            <li *ngFor="let variant of product.variants">{{ variant }}</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
   </div>
 </ion-content>
