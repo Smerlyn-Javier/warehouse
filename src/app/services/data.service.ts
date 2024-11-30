@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 
 export interface Message {
   fromName: string;
@@ -75,8 +76,7 @@ export class DataService {
   constructor(private readonly httpClient:HttpClient) { }
 
   public getProducts(){
-    // Implement HTTP request to fetch product data
-    return this.httpClient.get<{products:Product[]}>('http://127.0.0.1:8000/products/');
+      return this.httpClient.get<{products:Product[]}>('http://127.0.0.1:8000/products/');
   }
   public getMessages(): Message[] {
     return this.messages;

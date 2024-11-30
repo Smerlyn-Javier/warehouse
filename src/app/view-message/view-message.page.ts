@@ -18,10 +18,11 @@ export class ViewMessagePage implements OnInit {
 
   constructor() { }
   ngOnInit() {
-    this.data.getProducts().subscribe((data) => {
-      this.products.set(data.products)
-    })
-
+    setInterval(() => {
+      this.data.getProducts().subscribe((data) => {
+        this.products.set(data.products)
+      })
+    }, 5000);
   }
 
 
@@ -29,9 +30,6 @@ export class ViewMessagePage implements OnInit {
     const isIos = this.platform.is('ios')
     return isIos ? 'Inbox' : '';
   }
-
-
-
 
   totalStock() {
     return this.products().reduce((acc, product) => acc + product.stock, 0);
