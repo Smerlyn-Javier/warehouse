@@ -1,0 +1,8 @@
+{
+  "name": "warehouse",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular",
+  "id": "b3da831b"
+}
