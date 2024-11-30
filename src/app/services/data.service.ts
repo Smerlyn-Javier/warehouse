@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 export interface Message {
@@ -71,8 +72,12 @@ export class DataService {
     }
   ];
 
-  constructor() { }
+  constructor(private readonly httpClient:HttpClient) { }
 
+  public getProducts(){
+    // Implement HTTP request to fetch product data
+    return this.httpClient.get<{products:Product[]}>('http://127.0.0.1:8000/products/');
+  }
   public getMessages(): Message[] {
     return this.messages;
   }
@@ -80,4 +85,21 @@ export class DataService {
   public getMessageById(id: number): Message {
     return this.messages[id];
   }
+}
+
+export interface Product {
+  _id: string
+  name: string
+  price: number
+  stock: number
+  category: string
+  variants: string[]
+  supplier: Supplier
+  image_url: string
+}
+
+export interface Supplier {
+  name: string
+  contact: string
+  phone: string
 }

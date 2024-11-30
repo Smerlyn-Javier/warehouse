@@ -10,31 +10,38 @@
     <h2 class="summary-title">Resumen de Inventario</h2>
     <div class="summary-stats">
       <div class="stat">
-        <strong>Total de Productos:</strong> {{ products.length }}
+        <strong>Total de Productos:</strong> {{ products().length }}
       </div>
       <div class="stat">
         <strong>Total Stock Disponible:</strong> {{ totalStock() }}
       </div>
     </div>
   </div>
-
   <!-- Lista de Productos -->
-  <div class="product-grid">
-    <div *ngFor="let product of products" class="product-card">
-      <img *ngIf="product.image_url" [src]="product.image_url" alt="Imagen del Producto" class="product-image">
-      <div class="product-details">
-        <h2 class="product-name">{{ product.name }}</h2>
-        <p class="product-category">{{ product.category }}</p>
-        <p class="product-price">$ {{ product.price }}</p>
-        <p class="product-stock">Stock: {{ product.stock }}</p>
-        <div *ngIf="product.variants && product.variants.length > 0" class="product-variants">
-          <span>Variantes:</span>
-          <ul>
-            <li *ngFor="let variant of product.variants">{{ variant }}</li>
-          </ul>
-        </div>
-      </div>
+   @if(products().length){
+     <div class="product-grid">
+       @for(product of products();track $index){
+         <div class="product-card">
+           @if(product.image_url){
+             <img [src]="product.image_url" alt="Imagen del Producto" class="product-image">
+           }
+           <div class="product-details">
+             <h2 class="product-name">{{ product.name }}</h2>
+             <p class="product-category">{{ product.category }}</p>
+             <p class="product-price">$ {{ product.price }}</p>
+             <p class="product-stock">Stock: {{ product.stock }}</p>
+             <div *ngIf="product.variants && product.variants.length > 0" class="product-variants">
+               <span>Variantes:</span>
+               <ul>
+                 @for(variant of product.variants;track $index){
+                   <li>{{ variant }}</li>
+                 }
+               </ul>
+             </div>
+           </div>
 
-    </div>
-  </div>
+         </div>
+       }
+     </div>
+   }
 </ion-content>
